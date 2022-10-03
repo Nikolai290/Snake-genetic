@@ -24,6 +24,18 @@ namespace DefaultNamespace
             _heads = new List<GameObject>();
             GenerateFood();
             GenerateSnakes();
+            BuildWalls();
+            TransformCamera();
+        }
+
+        private void TransformCamera()
+        {
+            Camera.main.transform.position = new Vector3(
+                gameSettings.Width / 2,
+                gameSettings.Height / 2,
+                Camera.main.transform.position.z);
+            var max = gameSettings.Width > gameSettings.Height ? gameSettings.Width : gameSettings.Height;
+            Camera.main.orthographicSize = max / 2 + 2;
         }
 
         private void OnEatingHandler(GameObject food)
@@ -57,6 +69,7 @@ namespace DefaultNamespace
                 {
                     headMoving.OnScoreUp += _uiManager.OnScoreChangeHandler;
                 }
+
                 _heads.Add(head);
             }
         }
@@ -89,9 +102,28 @@ namespace DefaultNamespace
         private Vector3 GenerateRandomVector3Position()
         {
             return new Vector3(
-                Random.Range(-gameSettings.Width, gameSettings.Width),
-                Random.Range(-gameSettings.Height, gameSettings.Height),
+                Random.Range(0, gameSettings.Width),
+                Random.Range(0, gameSettings.Height),
                 0);
+        }
+
+        private void BuildWalls()
+        {
+            for (int i = -1; i <= gameSettings.Width + 1; i++)
+            {
+                var position1 = new Vector3(i, -1, 1);
+                var position2 = new Vector3(i, gameSettings.Height + 1, 1);
+                Instantiate(gameSettings.WallPrefab, position1, Quaternion.identity);
+                Instantiate(gameSettings.WallPrefab, position2, Quaternion.identity);
+            }
+
+            for (int i = 0; i <= gameSettings.Height; i++)
+            {
+                var position1 = new Vector3(-1, i, 1);
+                var position2 = new Vector3(gameSettings.Width + 1, i, 1);
+                Instantiate(gameSettings.WallPrefab, position1, Quaternion.identity);
+                Instantiate(gameSettings.WallPrefab, position2, Quaternion.identity); 
+            }
         }
     }
 }

@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: GameSettings_1
   m_EditorClassIdentifier: 
   FixedDeltaTime: 0.2
-  Foods: 30
-  Height: 15
-  Width: 25
+  Foods: 10
+  Height: 40
+  Width: 40
   Snakes: 1
   StarterLenght: 2
   FoodPrefab: {fileID: 114695921218238677, guid: dd11c050159b79848b5eaa4a0b2517c9, type: 3}
   HeadPrefab: {fileID: 1768939001288167485, guid: 0815fa09218213643ac028c6f5bbcee1, type: 3}
+  WallPrefab: {fileID: 2695766884201451458, guid: f469233616c879f44ab541716523b389, type: 3}
   ManualControl: 1

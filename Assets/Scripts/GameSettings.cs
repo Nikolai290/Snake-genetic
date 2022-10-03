@@ -14,6 +14,7 @@ namespace DefaultNamespace
 
         public GameObject FoodPrefab;
         public GameObject HeadPrefab;
+        public GameObject WallPrefab;
 
         public bool ManualControl = true;
     }

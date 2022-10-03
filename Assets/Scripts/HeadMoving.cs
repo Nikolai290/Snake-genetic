@@ -18,6 +18,8 @@ namespace Snake
 
         private int _scores;
 
+        public bool IsAlive { get; private set; } = true;
+
         private bool _borning => StarterLength > _bodyCells.Count;
 
         public int StarterLength { get; set; }
@@ -42,6 +44,7 @@ namespace Snake
             if (col.tag == "Food")
             {
                 Eating();
+                
                 OnEating?.Invoke(col.gameObject);
             }
         }
@@ -54,11 +57,19 @@ namespace Snake
 
         private void FixedUpdate()
         {
+            if (!IsAlive)
+            {
+                return;
+            }
             Moving();
         }
 
         private void Update()
         {
+            if (!IsAlive)
+            {
+                return;
+            }
             ReadInput();
         }
 
